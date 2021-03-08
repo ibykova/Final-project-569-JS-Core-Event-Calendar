@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+
+body {
+  display: flex;
+  margin-top: 0px;
+  justify-content: center;
+  background-image: url("/img/sunset.jpg");
+  background-color: #e8f4fa11;
+}
+button {
+  width: 75px;
+  cursor: pointer;
+  box-shadow: 0px 0px 2px gray;
+  border: none;
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  margin: 10px;
+}
+
+#monthDisplay {
+  font-family: "Nothing You Could Do", cursive;
+  font-size: larger;
+  color: #c84a67;
+  font-weight: bolder;
+}
+
+#backButton:hover {
+  font-weight: bold;
+  background-color: #8d3449;
+  box-shadow: 0px 0px 4px #aa4a60;
+}
+#nextButton:hover {
+  font-weight: bold;
+  background-color: #8d3449;
+  box-shadow: 0px 0px 4px #aa4a60;
+}
+
+#header {
+  padding: 10px;
+  font-size: 26px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+#header button {
+  background-color: #c84a67;
+}
+#container {
+  width: 770px;
+}
+#days {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  width: 100%;
+  display: flex;
+  color: #0039be;
+  border: 3px #dcd2e3;
+  box-shadow: 0px 0px 5px #c1c1c192;
+}
+#days div {
+  width: 100px;
+  padding: 10px;
+}
+#calendar {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#calendar-container {
+  background-color: #e8f4fa92;
+  box-shadow: 0px 0px 5px #e8f4fa92;
+}
+.day {
+  width: 100px;
+  padding: 10px;
+  height: 100px;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: #fffcff;
+  margin: 5px;
+  box-shadow: 0px 0px 3px #c2ccd4;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #2969ffae;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+}
+.day:hover {
+  background-color: #e8edfa;
+}
+
+.day + #currentDay {
+  background-color: #ffedd8;
+  border: 2px solid #f9dac4;
+  border-radius: 5px;
+  font-weight: bolder;
+  color: #ff9c20
+}
+.event {
+  font-size: 10px;
+  padding: 3px;
+  background-color: #58bae4;
+  color: white;
+  border-radius: 5px;
+  max-height: 55px;
+  overflow: hidden;
+}
+/* .padding {
+  cursor: default !important;
+  background-color: #fffcff !important;
+  box-shadow: none !important;
+} */
+#newEventModal,
+#deleteEventModal {
+  display: none;
+  z-index: 20;
+  padding: 25px;
+  background-color: #e8f4fa;
+  box-shadow: 0px 0px 3px #6c6c6c;
+  border-radius: 5px;
+  width: 350px;
+  top: 100px;
+  left: calc(50% - 175px);
+  position: absolute;
+  font-family: sans-serif;
+}
+#eventTitleInput {
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 25px;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 3px gray;
+}
+#eventTitleInput.error {
+  border: 2px solid #c84a67;
+}
+#cancelButton,
+#deleteButton {
+  background-color: #c84a67;
+}
+#saveButton,
+#closeButton {
+  background-color: #2969ffae;
+}
+#eventText {
+  font-size: 14px;
+}
+#modalBackDrop {
+  display: none;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: #666666;
+}
+
+.footer {
+  position: -ms-page;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-family: "Nothing You Could Do", cursive;
+  font-size: 16px;
+  color: #c84a67;
+  font-weight: 700;
+  background-color: #e8f4faae;
+  box-shadow: 0px 0px 5px #e8f4fa92;
+  text-shadow: 1px 1px 2px #ffd7e0;
+}
+
