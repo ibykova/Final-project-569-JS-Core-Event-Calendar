@@ -5,7 +5,7 @@ body {
   display: flex;
   margin-top: 0px;
   justify-content: center;
-  background-image: url("/img/sunset.jpg");
+  background-image: url("img/sunset.jpg");
   background-color: #e8f4fa11;
 }
 button {
