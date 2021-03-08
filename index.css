@@ -113,11 +113,11 @@ button {
   max-height: 55px;
   overflow: hidden;
 }
-/* .padding {
+.padding {
   cursor: default !important;
   background-color: #fffcff !important;
   box-shadow: none !important;
-} */
+}
 #newEventModal,
 #deleteEventModal {
   display: none;
@@ -164,7 +164,7 @@ button {
   width: 100vw;
   height: 100vh;
   position: absolute;
-  background-color: #666666;
+  background-color: #0f0f0f83;
 }
 
 .footer {
