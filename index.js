@@ -5,23 +5,49 @@ let clicked = null;
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
 
 const calendar = document.getElementById('calendar');
-const newEventModal = document.getElementById('newEventModal');
-const deleteEventModal = document.getElementById('deleteEventModal');
+const editEventModal = document.getElementById('editEventModal');
 const backDrop = document.getElementById('modalBackDrop');
 const eventTitleInput = document.getElementById('eventTitleInput');
+
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-function openModal(date) {
-  clicked = date;
 
+
+function openModal(date) {
+  //If we want to "Save" by pressing Enter while typing
+  clicked = date;
+  eventTitleInput.addEventListener('keyup', function (event) {
+    if (event.code === 'Enter') {
+      saveEvent();
+    }
+  });
+
+  //If we want to "Cancel" by pressing Esc while typing
+  editEventModal.addEventListener('keydown', function (event) {
+    console.log('event', event);
+    if (event.code === 'Escape') {
+      console.log('Esc');
+      closeModal();
+    }
+  });
+
+  //Here we listen if the dayCell was clicked. 
   const eventForDay = events.find(e => e.date === clicked);
 
   if (eventForDay) {
-    document.getElementById('eventText').innerText = eventForDay.title;
-    deleteEventModal.style.display = 'block';
-  } else {
-    newEventModal.style.display = 'block';
+    //If true --> then we open the event as an input, but with previous value.
+    //Also if the event was previously created - we add a "Delete" button
+    eventTitleInput.value = eventForDay.title;
+    if (!document.getElementById('deleteButton')) {
+      const delBtn = document.createElement('button');
+      delBtn.innerText = 'Delete';
+      delBtn.id = 'deleteButton';
+      delBtn.addEventListener('click', deleteEvent);
+      editEventModal.appendChild(delBtn);
+    }
   }
+
+  editEventModal.style.display = 'block';
 
   backDrop.style.display = 'block';
 }
@@ -40,22 +66,23 @@ function load() {
 
   const firstDayOfMonth = new Date(year, month, 1);
   const daysInMonth = new Date(year, month + 1/* to increment month*/, 0/*it's the last day of previous month*/).getDate();
-  
+
   const dateString = firstDayOfMonth.toLocaleDateString('en-UA'/*for USA en-US*/, {
     weekday: 'long',
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
   });
-  const emptyDayCell = days.indexOf(dateString.split(', ')[0]);/*to separate the "extra" day of previous month from the Date itself*/
+  /*to separate the "extra" day of previous month from the Date itself*/
+  const emptyDayCell = days.indexOf(dateString.split(', ')[0]);
 
-  document.getElementById('monthDisplay').innerText = 
+  document.getElementById('monthDisplay').innerText =
     `${date.toLocaleDateString('en-UA', { month: 'long' })} ${year}`;
 
   calendar.innerHTML = '';
 
   //This we do to be able to get the correct amount of days in a month and to get the needed data
-  for(let i = 1; i <= emptyDayCell + daysInMonth; i++) {
+  for (let i = 1; i <= emptyDayCell + daysInMonth; i++) {
     const calDayCell = document.createElement('div');
     calDayCell.classList.add('day');
 
@@ -81,28 +108,39 @@ function load() {
       calDayCell.classList.add('emptyDay');
     }
 
-    calendar.appendChild(calDayCell);    
+    calendar.appendChild(calDayCell);
   }
 }
 
 function closeModal() {
   eventTitleInput.classList.remove('error');
-  newEventModal.style.display = 'none';
-  deleteEventModal.style.display = 'none';
+  editEventModal.style.display = 'none';
   backDrop.style.display = 'none';
   eventTitleInput.value = '';
   clicked = null;
+  //Here we want to remove "delete btn" for no plural
+  document.getElementById('deleteButton')?.remove();
+
   load();
 }
 
 function saveEvent() {
   if (eventTitleInput.value) {
+    console.log(eventTitleInput.value);
     eventTitleInput.classList.remove('error');
 
-    events.push({
-      date: clicked,
-      title: eventTitleInput.value,
-    });
+    const eventForDay = events.find(e => e.date === clicked);
+    if (eventForDay) {
+      console.log('edit');
+      eventForDay.title = eventTitleInput.value;
+    } else {
+      console.log('push');
+      events.push({
+        date: clicked,
+        title: eventTitleInput.value,
+      });
+    }
+
 
     localStorage.setItem('events', JSON.stringify(events));
     closeModal();
@@ -111,12 +149,14 @@ function saveEvent() {
   }
 }
 
+
 function deleteEvent() {
   events = events.filter(e => e.date !== clicked);
   localStorage.setItem('events', JSON.stringify(events));
   closeModal();
 }
 
+//This func initializes all btns on the page
 function headButtons() {
   document.getElementById('nextButton').addEventListener('click', () => {
     navigation++;
@@ -130,8 +170,6 @@ function headButtons() {
 
   document.getElementById('saveButton').addEventListener('click', saveEvent);
   document.getElementById('cancelButton').addEventListener('click', closeModal);
-  document.getElementById('deleteButton').addEventListener('click', deleteEvent);
-  document.getElementById('closeButton').addEventListener('click', closeModal);
 }
 
 headButtons();

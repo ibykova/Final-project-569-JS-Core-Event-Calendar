@@ -57,6 +57,7 @@ button {
   font-size: 14px;
   width: 100%;
   display: flex;
+  text-align: center;
   color: #0039be;
   border: 3px #dcd2e3;
   box-shadow: 0px 0px 5px #c1c1c192;
@@ -101,7 +102,7 @@ button {
   background-color: #ffedd8;
   border: 2px solid #f9dac4;
   border-radius: 5px;
-  font-weight: bolder;
+  font-weight: 800;
   color: #ff9c20
 }
 .event {
@@ -123,7 +124,7 @@ button {
   background-color: #fffcff96;
 }
 
-#newEventModal,
+#editEventModal,
 #deleteEventModal {
   display: none;
   z-index: 20;
@@ -150,15 +151,29 @@ button {
   box-shadow: 0px 0px 3px gray;
 }
 #eventTitleInput.error {
-  border: 2px solid #c84a67;
+  border: 2px solid #ff003c;
 }
-#cancelButton,
+#cancelButton {
+  background-color: #2969ffae;
+}
+
+#cancelButton:hover {
+  background-color: #113da3ae;
+}
+
 #deleteButton {
   background-color: #c84a67;
 }
-#saveButton,
-#closeButton {
-  background-color: #2969ffae;
+
+#deleteButton:hover {
+  background-color: #862239;
+}
+#saveButton {
+  background-color: #4ac4c8;
+}
+
+#saveButton:hover {
+  background-color: #229094;
 }
 #eventText {
   font-size: 14px;
