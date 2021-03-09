@@ -1,12 +1,12 @@
 // Navigation starts with 0 for current mobth (as you open the app). Therefore 1 - is next month
 //when you click the button, and -1 is the previous month
 let navigation = 0;
-let clicked = null;
+let clickedDate = null;
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
 
 const calendar = document.getElementById('calendar');
 const editEventModal = document.getElementById('editEventModal');
-const backDrop = document.getElementById('modalBackDrop');
+const background = document.getElementById('modalBackground');
 const eventTitleInput = document.getElementById('eventTitleInput');
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -15,7 +15,7 @@ const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
 
 function openModal(date) {
   //If we want to "Save" by pressing Enter while typing
-  clicked = date;
+  clickedDate = date;
   eventTitleInput.addEventListener('keyup', function (event) {
     if (event.code === 'Enter') {
       saveEvent();
@@ -32,7 +32,7 @@ function openModal(date) {
   });
 
   //Here we listen if the dayCell was clicked. 
-  const eventForDay = events.find(e => e.date === clicked);
+  const eventForDay = events.find(e => e.date === clickedDate);
 
   if (eventForDay) {
     //If true --> then we open the event as an input, but with previous value.
@@ -49,7 +49,7 @@ function openModal(date) {
 
   editEventModal.style.display = 'block';
 
-  backDrop.style.display = 'block';
+  background.style.display = 'block';
 }
 
 // Here we have to create a function which will download the data of current Date
@@ -115,9 +115,9 @@ function load() {
 function closeModal() {
   eventTitleInput.classList.remove('error');
   editEventModal.style.display = 'none';
-  backDrop.style.display = 'none';
+  background.style.display = 'none';
   eventTitleInput.value = '';
-  clicked = null;
+  clickedDate = null;
   //Here we want to remove "delete btn" for no plural
   document.getElementById('deleteButton')?.remove();
 
@@ -129,14 +129,14 @@ function saveEvent() {
     console.log(eventTitleInput.value);
     eventTitleInput.classList.remove('error');
 
-    const eventForDay = events.find(e => e.date === clicked);
+    const eventForDay = events.find(e => e.date === clickedDate);
     if (eventForDay) {
       console.log('edit');
       eventForDay.title = eventTitleInput.value;
     } else {
       console.log('push');
       events.push({
-        date: clicked,
+        date: clickedDate,
         title: eventTitleInput.value,
       });
     }
@@ -151,7 +151,7 @@ function saveEvent() {
 
 
 function deleteEvent() {
-  events = events.filter(e => e.date !== clicked);
+  events = events.filter(e => e.date !== clickedDate);
   localStorage.setItem('events', JSON.stringify(events));
   closeModal();
 }
