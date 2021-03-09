@@ -113,24 +113,31 @@ button {
   max-height: 55px;
   overflow: hidden;
 }
-.padding {
-  cursor: default !important;
-  background-color: #fffcff !important;
-  box-shadow: none !important;
+.emptyDay {
+  cursor: default;
+  background-color: #fffcff96;
+  box-shadow: none;
 }
+
+.emptyDay:hover {
+  background-color: #fffcff96;
+}
+
 #newEventModal,
 #deleteEventModal {
   display: none;
   z-index: 20;
   padding: 25px;
-  background-color: #e8f4fa;
+  background-color: #e4edf1;
   box-shadow: 0px 0px 3px #6c6c6c;
   border-radius: 5px;
   width: 350px;
   top: 100px;
   left: calc(50% - 175px);
   position: absolute;
-  font-family: sans-serif;
+  font-family: 'Lato';
+  font-weight: 300;
+  color: #0039be;
 }
 #eventTitleInput {
   padding: 10px;

@@ -9,7 +9,7 @@ const newEventModal = document.getElementById('newEventModal');
 const deleteEventModal = document.getElementById('deleteEventModal');
 const backDrop = document.getElementById('modalBackDrop');
 const eventTitleInput = document.getElementById('eventTitleInput');
-const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 function openModal(date) {
   clicked = date;
@@ -47,7 +47,7 @@ function load() {
     month: 'numeric',
     day: 'numeric',
   });
-  const emptyDayCell = weekdays.indexOf(dateString.split(', ')[0]);/*to separate the "extra" day of previous month from the Date itself*/
+  const emptyDayCell = days.indexOf(dateString.split(', ')[0]);/*to separate the "extra" day of previous month from the Date itself*/
 
   document.getElementById('monthDisplay').innerText = 
     `${date.toLocaleDateString('en-UA', { month: 'long' })} ${year}`;
@@ -78,7 +78,7 @@ function load() {
       //We want to run the function every time user clicks on the DayCell
       calDayCell.addEventListener('click', () => openModal(dayString));
     } else {
-      calDayCell.classList.add('padding');
+      calDayCell.classList.add('emptyDay');
     }
 
     calendar.appendChild(calDayCell);    
